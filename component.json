@@ -1,0 +1,101 @@
+{
+    "title": "Cloud Asset",
+    "description": "The cloud asset API manages the history and inventory of cloud resources.",
+    "docsUrl": "https://console.cloud.google.com/apis/api/cloudasset.googleapis.com/overview",
+    "url": "https://api.apis.guru/v2/specs/googleapis.com/cloudasset/v1beta1/swagger.json",
+    "envVars": {
+        "OAUTH_CLIENT_ID": {
+            "description": "OAuth Client ID"
+        },
+        "OAUTH_CLIENT_SECRET": {
+            "description": "OAuth Client Secret"
+        }
+    },
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://cloudasset.googleapis.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "Oauth2": {
+                "label": "Oauth 2.0 authentication",
+                "viewClass": "OAuthFieldView"
+            }
+        },
+        "oauth2": {
+            "client_id": "{{OAUTH_CLIENT_ID}}",
+            "client_secret": "{{OAUTH_CLIENT_SECRET}}",
+            "auth_uri": "https://accounts.google.com/o/oauth2/auth"
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "cloudasset_projects_operations_get": {
+            "main": "./lib/actions/cloudasset_projects_operations_get.js",
+            "title": "Gets the latest state of a long-running operation.  Clients can use this\nmethod to poll the operation result at intervals as recommended by the API\nservice.",
+            "description": "Gets the latest state of a long-running operation.  Clients can use this\nmethod to poll the operation result at intervals as recommended by the API\nservice.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/cloudasset_projects_operations_get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "cloudasset_projects_batchGetAssetsHistory": {
+            "main": "./lib/actions/cloudasset_projects_batchGetAssetsHistory.js",
+            "title": "Batch gets the update history of assets that overlap a time window.\nFor RESOURCE content, this API outputs history with asset in both\nnon-delete or deleted status.\nFor IAM_POLICY content, this API outputs history when the asset and its\nattached IAM POLICY both exist. This can create gaps in the output history.\nIf a specified asset does not exist, this API returns an INVALID_ARGUMENT\nerror.",
+            "description": "Batch gets the update history of assets that overlap a time window.\nFor RESOURCE content, this API outputs history with asset in both\nnon-delete or deleted status.\nFor IAM_POLICY content, this API outputs history when the asset and its\nattached IAM POLICY both exist. This can create gaps in the output history.\nIf a specified asset does not exist, this API returns an INVALID_ARGUMENT\nerror.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/cloudasset_projects_batchGetAssetsHistory.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "cloudasset_projects_exportAssets": {
+            "main": "./lib/actions/cloudasset_projects_exportAssets.js",
+            "title": "Exports assets with time and resource types to a given Cloud Storage\nlocation. The output format is newline-delimited JSON.\nThis API implements the google.longrunning.Operation API allowing you\nto keep track of the export.",
+            "description": "Exports assets with time and resource types to a given Cloud Storage\nlocation. The output format is newline-delimited JSON.\nThis API implements the google.longrunning.Operation API allowing you\nto keep track of the export.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/cloudasset_projects_exportAssets.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}
